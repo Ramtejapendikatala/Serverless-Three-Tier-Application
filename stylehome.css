@@ -1,0 +1,79 @@
+/* Set background image for the whole page */
+body {
+    margin: 0;
+    padding: 0;
+    background: url('https://static.wixstatic.com/media/a3c153_3592f141741849e8b2cb99afa8e3a412~mv2.jpg/v1/fill/w_1470,h_1130,al_c,q_85,usm_0.66_1.00_0.01,enc_auto/a3c153_3592f141741849e8b2cb99afa8e3a412~mv2.jpg') no-repeat center center fixed;
+    background-size: cover;
+    font-family:'Times New Roman', Times, serif;
+}
+
+/* Centering content container */
+.content-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; /* Full viewport height */
+}
+
+/* Styling the box */
+.content-box {
+    font-family: 'Times New Roman', Times, serif;
+    background-color: rgb(32, 37, 43); /* White background with some transparency */
+    padding: 50px;
+    color:whitesmoke;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(233, 222, 222, 0.2);
+    text-align: center;
+    max-width: 500px; /* Maximum width for responsiveness */
+    width: 100%; /* Full width within max-width */
+    
+}
+
+.header{
+    background-color: rgb(32, 37, 43);
+    height:100px;
+    width :auto;
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    height: 15vh; /* Full viewport height */ 
+}
+.logo{
+    padding:25px;
+    padding-left: 50px;
+}
+.head{
+    font-size: 50px;
+}
+.bot{
+    font-size: 20px;
+    padding-bottom:15px;
+}
+.para{
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    font: 100px;
+    font:700;
+}
+.mainhead{
+    color:whitesmoke;
+}
+/* Styling the button */
+.register-button {
+    display: inline-block;
+    margin-top: 20px;
+    padding: 10px 20px;
+    font-size: 16px;
+    color:black;
+    font-size: large;
+    font:bold;
+    background-color: #eef0f3; /* Bootstrap primary color, change as needed */
+    border: none;
+    border-radius: 5px;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+}
+
+.register-button:hover {
+    background-color: black; /* Darker shade for hover effect */
+    color:#eef0f3;
+}

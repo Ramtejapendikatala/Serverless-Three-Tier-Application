@@ -1,0 +1,119 @@
+/* General Styles */
+body {
+    font-family:'Times New Roman', Times, serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+.header{
+    background-color: rgb(32, 37, 43);
+    height:100px;
+    width :auto;
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    height: 15vh; /* Full viewport height */  
+}
+.logo{
+    padding:25px;
+    padding-left: 50px;
+}
+.mainhead{
+    color:whitesmoke;
+}
+
+
+
+
+.register-button {
+    display: inline-block;
+    padding: 10px 20px;
+    margin-top: 20px;
+    background-color: #28a745;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: opacity 0.5s ease-in-out;
+}
+
+.register-button:hover {
+    opacity: 0.8;
+}
+
+/* Page 2 Styles */
+.page2-background {
+    display: flex;
+    height: 150vh;
+}
+
+.page2-left,.page2-right {
+    width: 40%;
+    padding: 40px;
+    box-sizing: border-box;
+    font-family: 'Times New Roman', Times, serif;
+}
+.page2-right {
+    width: 60%;
+    padding-left: 75px;
+    padding-right: 75px;
+    box-sizing: border-box;
+}
+.page2-left {
+    background: whitesmoke;
+    border-right: 2px solid black;
+}
+
+.page2-right {
+    background: slategray;
+}
+
+h1 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+label {
+    display: block;
+    margin-bottom: 6px;
+}
+.tat{
+    padding-top: 30px;
+}
+.tit{
+    font-size:17px;
+    
+}
+input[type="text"],
+input[type="email"],
+input[type="tel"],
+input[type="date"],
+select {
+    width: 100%;
+    padding: 8px;
+    box-sizing: border-box;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+button {
+    width: 100%;
+    padding: 10px;
+    border: none;
+    background-color: #28a745;
+    color: #fff;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #218838;
+}
+
+.error-message {
+    color: #e74c3c;
+    font-size: 0.875em;
+}

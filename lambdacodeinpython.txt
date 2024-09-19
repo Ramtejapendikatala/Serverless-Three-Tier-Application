@@ -1,0 +1,104 @@
+import json
+import logging
+import pymysql
+
+# Configure logging
+logger = logging.getLogger()
+logger.setLevel(logging.INFO)
+
+# Database configuration (replace these with your actual database credentials)
+DB_HOST = 'database-1.c748oseu4sqb.us-east-1.rds.amazonaws.com'
+DB_PORT = 3306
+DB_USER = 'admin'
+DB_PASSWORD = 'mypassword'
+DB_NAME = 'formdata1'
+
+# Helper function to get a database connection
+def get_db_connection():
+    return pymysql.connect(
+        host=DB_HOST,
+        port=DB_PORT,
+        user=DB_USER,
+        password=DB_PASSWORD,
+        database=DB_NAME,
+        cursorclass=pymysql.cursors.DictCursor
+    )
+
+def lambda_handler(event, context):
+    logger.info("Received event: %s", json.dumps(event, indent=2))
+    
+    # Extract request body
+    body = event.get('body', {})
+    logger.info("Raw body: %s", body)
+    
+    # If body is a JSON string, parse it
+    if isinstance(body, str):
+        try:
+            body = json.loads(body)
+            logger.info("Parsed body: %s", body)
+        except json.JSONDecodeError:
+            logger.error("Failed to decode JSON body")
+            return {
+                'statusCode': 400,
+                'body': json.dumps({'error': 'Invalid JSON format'})
+            }
+    
+    # Extract data from body
+    email = body.get('email')
+    firstName = body.get('firstName')
+    lastName = body.get('lastName')
+    phone = body.get('phone')
+    birthday = body.get('birthday')
+    position = body.get('position')
+    courseLevel = body.get('courseLevel')
+    timeSlot = body.get('timeSlot')
+    
+    # Validate required fields
+    if not email or not firstName or not lastName:
+        return {
+            'statusCode': 400,
+            'body': json.dumps({'error': 'Missing required fields'})
+        }
+    
+    # Connect to the database
+    try:
+        connection = get_db_connection()
+        with connection.cursor() as cursor:
+            # Check if the email already exists
+            cursor.execute("SELECT * FROM users WHERE email = %s", (email,))
+            result = cursor.fetchone()
+            
+            if result:
+                return {
+                    'statusCode': 400,
+                    'body': json.dumps({'error': 'Email ID already exists'})
+                }
+            
+            # Insert the new record
+            sql = """
+                INSERT INTO users (email, firstName, lastName, phone, birthday, position, courseLevel, timeSlot)
+                VALUES (%s, %s, %s, %s, %s, %s, %s, %s)
+            """
+            cursor.execute(sql, (email, firstName, lastName, phone, birthday, position, courseLevel, timeSlot))
+            connection.commit()
+    
+    except Exception as e:
+        logger.error("Database operation failed: %s", str(e))
+        return {
+            'statusCode': 500,
+            'body': json.dumps({'error': 'Internal server error'})
+        }
+    
+    finally:
+        connection.close()
+    
+    # Create a success response
+    response = {
+        'statusCode': 201,
+        'body': json.dumps({'message': 'User successfully created'})
+    }
+    
+    logger.info("Response: %s", json.dumps(response, indent=2))
+    
+    return response
+
